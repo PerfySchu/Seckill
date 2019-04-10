@@ -57,7 +57,8 @@ public class SeckillUserService {
         }
 
         //添加cookie
-        addCooike(response, user);
+        String token = UUIDUtil.uuid();
+        addCooike(response, token, user);
         return true;
     }
 
@@ -67,14 +68,13 @@ public class SeckillUserService {
         }
         SeckillUser user = redisService.get(SeckillUserKey.token, token, SeckillUser.class);
         if(user != null) {
-            addCooike(response, user);
+            addCooike(response,token, user);
         }
         return user;
     }
 
-    private void addCooike(HttpServletResponse response, SeckillUser user){
+    private void addCooike(HttpServletResponse response, String token, SeckillUser user){
         //生成cookie
-        String token = UUIDUtil.uuid();
         redisService.set(SeckillUserKey.token, token, user);
         Cookie cookie = new Cookie(COOKIE_NAME_TOKEN, token);
         cookie.setMaxAge(SeckillUserKey.token.expireSeconds());
