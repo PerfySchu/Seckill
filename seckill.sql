@@ -1,21 +1,93 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : My
+ Source Server         : 本地
  Source Server Type    : MySQL
- Source Server Version : 50722
+ Source Server Version : 50721
  Source Host           : localhost:3306
  Source Schema         : seckill
 
  Target Server Type    : MySQL
- Target Server Version : 50722
+ Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 07/04/2019 22:59:51
+ Date: 10/04/2019 18:39:36
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for goods
+-- ----------------------------
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '商品ID',
+  `goods_name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品名称',
+  `goods_title` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品标题',
+  `goods_img` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品图片',
+  `goods_detail` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '商品详情介绍',
+  `goods_price` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '商品单价',
+  `goods_stock` int(11) NULL DEFAULT 0 COMMENT '商品库存， -1表示没有限制',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of goods
+-- ----------------------------
+INSERT INTO `goods` VALUES (1, 'iphoneX', 'Apple iPhone X (A1865) 64G 深空灰', '/img/iphonex.png', NULL, 8765.00, 100);
+INSERT INTO `goods` VALUES (2, '华为Mate 11', '华为Mate 11 8G+128G', '/img/mate10.png', NULL, 3333.00, 50);
+
+-- ----------------------------
+-- Table structure for order_info
+-- ----------------------------
+DROP TABLE IF EXISTS `order_info`;
+CREATE TABLE `order_info`  (
+  `id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',
+  `goods_id` bigint(20) UNSIGNED NULL DEFAULT NULL COMMENT '商品ID',
+  `delivery_addr_id` bigint(20) NULL DEFAULT NULL COMMENT '收获地址ID',
+  `goods_name` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '冗余过来的商品名称',
+  `goods_count` int(11) NULL DEFAULT 0 COMMENT '商品数量',
+  `goods_price` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '商品单价',
+  `order_channel` tinyint(4) NULL DEFAULT 0 COMMENT '下单渠道 1 pc,  2 android,  3 ios',
+  `status` tinyint(4) NULL DEFAULT 0 COMMENT '订单状态 0新建未支付，1已支付，2已发货，3已收货，4已退款，5已完成',
+  `create_date` datetime(0) NULL DEFAULT NULL COMMENT '订单创建时间',
+  `pay_date` datetime(0) NULL DEFAULT NULL COMMENT '支付时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for seckill_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `seckill_goods`;
+CREATE TABLE `seckill_goods`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '秒杀商品表id',
+  `goods_id` bigint(20) NULL DEFAULT NULL COMMENT '商品id',
+  `seckill_price` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '秒杀价格',
+  `stock_count` int(11) NULL DEFAULT NULL COMMENT '库存数量',
+  `start_date` datetime(0) NULL DEFAULT NULL COMMENT '秒杀开始时间',
+  `end_date` datetime(0) NULL DEFAULT NULL COMMENT '秒杀结束时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of seckill_goods
+-- ----------------------------
+INSERT INTO `seckill_goods` VALUES (1, 1, 0.01, 10, '2019-04-09 17:09:03', '2019-04-11 17:09:09');
+INSERT INTO `seckill_goods` VALUES (2, 2, 0.01, 10, '2019-04-09 17:09:03', '2019-04-11 17:09:09');
+
+-- ----------------------------
+-- Table structure for seckill_order
+-- ----------------------------
+DROP TABLE IF EXISTS `seckill_order`;
+CREATE TABLE `seckill_order`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',
+  `order_id` bigint(20) NULL DEFAULT NULL COMMENT '订单ID',
+  `goods_id` bigint(20) NULL DEFAULT NULL COMMENT '商品ID',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for seckill_user
