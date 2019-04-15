@@ -10,7 +10,7 @@ import java.util.Date;
  **/
 public class SeckillGoods {
     private Long id;
-    private String goodsId;
+    private Long goodsId;
     private Integer stockCount;
     private Date startDate;
     private Date endDate;
@@ -23,11 +23,11 @@ public class SeckillGoods {
         this.id = id;
     }
 
-    public String getGoodsId() {
+    public Long getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(String goodsId) {
+    public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
     }
 

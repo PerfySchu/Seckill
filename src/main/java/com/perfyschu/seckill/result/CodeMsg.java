@@ -31,6 +31,10 @@ public class CodeMsg {
     public static CodeMsg CHECK_ERROR = new CodeMsg(500214, "用户名或密码错误");
     /**手机号码不存在*/
     public static CodeMsg MOBILE_NOT_EXIST = new CodeMsg(500215, "手机号码不存在");
+    /**秒杀商品已售罄*/
+    public static CodeMsg SECKILL_END = new CodeMsg(500500, "秒杀商品已售罄");
+    /**已参与秒杀*/
+    public static CodeMsg SECKILL_REPEAT = new CodeMsg(500501, "您已秒杀过该商品");
 
     private CodeMsg(int code, String msg) {
         this.code = code;

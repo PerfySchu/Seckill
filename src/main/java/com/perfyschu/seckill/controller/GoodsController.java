@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,10 +47,31 @@ public class GoodsController {
         return "goods_list";
     }
 
-    @RequestMapping("/to_detail")
-    public String toDetail(HttpServletResponse response, Model model,
-                         @CookieValue(value=SeckillUserService.COOKIE_NAME_TOKEN, required = false)String cookieToken,
-                         @RequestParam(value=SeckillUserService.COOKIE_NAME_TOKEN, required = false)String paramToken){
+    @RequestMapping("/to_detail/{goodsId}")
+    public String toDetail(Model model, SeckillUser user, @PathVariable("goodsId")long goodsId){
+        model.addAttribute("user", user);
+
+        GoodsVo goodsVo = goodsService.getGoodsVoByBoodsId(goodsId);
+        model.addAttribute("goods", goodsVo);
+
+        long startAt = goodsVo.getStartDate().getTime();
+        long endAt = goodsVo.getEndDate().getTime();
+        long now = System.currentTimeMillis();
+        int remainSeconds;
+        int seckillStatus;
+        if(now < startAt){
+            seckillStatus = 0;
+            remainSeconds = (int) ((startAt - now)/1000);
+        }else if(now > endAt){
+            seckillStatus = 2;
+            remainSeconds = -1;
+        }else{
+            seckillStatus = 1;
+            remainSeconds = 0;
+        }
+        model.addAttribute("seckillStatus", seckillStatus);
+        model.addAttribute("remainSeconds", remainSeconds);
+
         return "goods_detail";
     }
 }
