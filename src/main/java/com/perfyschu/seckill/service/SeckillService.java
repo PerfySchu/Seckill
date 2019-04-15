@@ -25,15 +25,10 @@ public class SeckillService {
 
     @Transactional
     public OrderInfo seckill(SeckillUser user, GoodsVo goodsVo) {
-        try {
-            //减库存， 下订单， 写入秒杀订单
-            goodsService.reduceStock(goodsVo);
+        //减库存， 下订单， 写入秒杀订单
+        goodsService.reduceStock(goodsVo);
 
-            return orderService.createOrder(user, goodsVo);
+        return orderService.createOrder(user, goodsVo);
 
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
     }
 }
