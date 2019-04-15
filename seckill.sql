@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 10/04/2019 18:39:36
+ Date: 15/04/2019 16:54:44
 */
 
 SET NAMES utf8mb4;
@@ -43,7 +43,7 @@ INSERT INTO `goods` VALUES (2, '华为Mate 11', '华为Mate 11 8G+128G', '/img/m
 -- ----------------------------
 DROP TABLE IF EXISTS `order_info`;
 CREATE TABLE `order_info`  (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',
   `goods_id` bigint(20) UNSIGNED NULL DEFAULT NULL COMMENT '商品ID',
   `delivery_addr_id` bigint(20) NULL DEFAULT NULL COMMENT '收获地址ID',
@@ -55,7 +55,12 @@ CREATE TABLE `order_info`  (
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '订单创建时间',
   `pay_date` datetime(0) NULL DEFAULT NULL COMMENT '支付时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_info
+-- ----------------------------
+INSERT INTO `order_info` VALUES (1, 15527186096, 1, NULL, 'iphoneX', 1, 0.01, 1, 0, '2019-04-15 16:46:07', NULL);
 
 -- ----------------------------
 -- Table structure for seckill_goods
@@ -74,8 +79,8 @@ CREATE TABLE `seckill_goods`  (
 -- ----------------------------
 -- Records of seckill_goods
 -- ----------------------------
-INSERT INTO `seckill_goods` VALUES (1, 1, 0.01, 10, '2019-04-09 17:09:03', '2019-04-11 17:09:09');
-INSERT INTO `seckill_goods` VALUES (2, 2, 0.01, 10, '2019-04-09 17:09:03', '2019-04-11 17:09:09');
+INSERT INTO `seckill_goods` VALUES (1, 1, 0.01, 9, '2019-04-14 18:45:50', '2019-04-15 21:26:08');
+INSERT INTO `seckill_goods` VALUES (2, 2, 0.01, 10, '2019-04-14 18:45:50', '2019-04-15 21:26:03');
 
 -- ----------------------------
 -- Table structure for seckill_order
@@ -87,7 +92,12 @@ CREATE TABLE `seckill_order`  (
   `order_id` bigint(20) NULL DEFAULT NULL COMMENT '订单ID',
   `goods_id` bigint(20) NULL DEFAULT NULL COMMENT '商品ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of seckill_order
+-- ----------------------------
+INSERT INTO `seckill_order` VALUES (1, 15527186096, 1, 1);
 
 -- ----------------------------
 -- Table structure for seckill_user
