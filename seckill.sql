@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 15/04/2019 16:54:44
+ Date: 16/04/2019 13:11:20
 */
 
 SET NAMES utf8mb4;
@@ -55,12 +55,13 @@ CREATE TABLE `order_info`  (
   `create_date` datetime(0) NULL DEFAULT NULL COMMENT '订单创建时间',
   `pay_date` datetime(0) NULL DEFAULT NULL COMMENT '支付时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
 INSERT INTO `order_info` VALUES (1, 15527186096, 1, NULL, 'iphoneX', 1, 0.01, 1, 0, '2019-04-15 16:46:07', NULL);
+INSERT INTO `order_info` VALUES (2, 15527186096, 2, NULL, '华为Mate 11', 1, 0.01, 1, 0, '2019-04-16 13:08:45', NULL);
 
 -- ----------------------------
 -- Table structure for seckill_goods
@@ -79,8 +80,8 @@ CREATE TABLE `seckill_goods`  (
 -- ----------------------------
 -- Records of seckill_goods
 -- ----------------------------
-INSERT INTO `seckill_goods` VALUES (1, 1, 0.01, 9, '2019-04-14 18:45:50', '2019-04-15 21:26:08');
-INSERT INTO `seckill_goods` VALUES (2, 2, 0.01, 10, '2019-04-14 18:45:50', '2019-04-15 21:26:03');
+INSERT INTO `seckill_goods` VALUES (1, 1, 0.01, 9, '2019-04-14 18:45:50', '2019-04-16 21:26:08');
+INSERT INTO `seckill_goods` VALUES (2, 2, 0.01, 9, '2019-04-14 18:45:50', '2019-04-16 21:26:03');
 
 -- ----------------------------
 -- Table structure for seckill_order
@@ -92,12 +93,13 @@ CREATE TABLE `seckill_order`  (
   `order_id` bigint(20) NULL DEFAULT NULL COMMENT '订单ID',
   `goods_id` bigint(20) NULL DEFAULT NULL COMMENT '商品ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of seckill_order
 -- ----------------------------
 INSERT INTO `seckill_order` VALUES (1, 15527186096, 1, 1);
+INSERT INTO `seckill_order` VALUES (2, 15527186096, 1, 2);
 
 -- ----------------------------
 -- Table structure for seckill_user
